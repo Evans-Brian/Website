@@ -38,6 +38,14 @@ html {
  * A better looking default horizontal rule
  */
 
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
 
 /*
  * Remove the gap between audio, canvas, iframes,
@@ -166,6 +174,12 @@ blockquote p {
     color: #666;
     max-width: 460px;
 }
+hr {
+    width: 100%;
+    margin: 0 auto 0 0;
+    color: #999;
+}
+
 
 
 nav ul, footer ul {
