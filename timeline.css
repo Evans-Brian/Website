@@ -1,0 +1,85 @@
+/* Import */
+
+/* TIMELINE */
+/* Import */
+
+@import url('https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i|Saira+Extra+Condensed:100,200,300,400,500,600,700,800|Saira:100,200,300,400,500,600,700,800');
+
+/* Variables */
+
+:root {
+  --main-accent-color: rgb(192, 57, 43);
+}
+
+/* Base */
+
+
+/* Timeline */
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  border: 1px solid #ddd;
+}
+
+ul li {
+  padding: 8px 16px;
+  border-bottom: 1px dashed #ddd;
+}
+
+.timeline {
+  border-left: 4px solid var(--main-accent-color);
+  background: fade(white, 3%);
+  color: fade(white, 80%);
+  font-family: 'Chivo', sans-serif;
+  margin: 50px auto;
+  letter-spacing: 0.5px;
+  position: relative;
+  line-height: 1.4em;
+  font-size: 1.03em;
+  padding: 50px;
+  padding-bottom: 0px;
+  list-style: none;
+  text-align: left;
+  font-weight: 100;
+  max-width: 30%;
+  }
+
+.event {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin: 0px;
+  }
+
+  .event-title {
+      margin-top: 25px;
+      margin-bottom: 0px;
+    }
+
+.timeline-circle {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  top: -20px;
+  left: -76px;
+  background: white;
+  -moz-border-radius: 60px;
+  -webkit-border-radius: 60px;
+  border-radius: 50%;
+  border: 3px solid var(--main-accent-color);
+  margin: 0px;
+}
+
+.date {
+  font-weight: 100;
+  font-size: 0.9em;
+  position: relative;
+  top: -40px;
+  left: -130px;
+  margin: 0px;
+}
+
+.timeline-description {
+  position: relative;
+  top: -40px;
+}

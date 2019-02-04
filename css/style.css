@@ -6,9 +6,16 @@
 	Spatial by TEMPLATED
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+	rgb(192, 57, 100, .4)
 */
 
 /* Basic */
+	:root {
+	  --main-accent-color: rgb(192, 57, 43);
+		--main-accent-opaque-color: rgb(192, 57, 100, .4);
+	  --main-txt-color: blue;
+	  --main-padding: 15px;
+	}
 
 	body {
 		background: #fff;
@@ -28,7 +35,7 @@
 		}
 
 	body, input, select, textarea {
-		color: #666;
+		color: rgb(0, 0, 0);
 		font-family: "Raleway", Arial, Helvetica, sans-serif;
 		font-size: 13pt;
 		font-weight: 400;
@@ -36,7 +43,7 @@
 	}
 
 	a {
-		color: #f32853;
+		color: var(--main-accent-color);
 		text-decoration: none;
 	}
 
@@ -71,15 +78,18 @@
 		}
 
 	h2 {
-		font-size: 1.75em;
-		line-height: 1.5em;
-    border-bottom: 1px solid #c0392b;
+		font-size: 1.6em;
+		line-height: .1em;
+    border-bottom: 1px solid var(--main-accent-color);
+		padding-bottom: .45em;
 	}
 
 
 	h3 {
-		font-size: 1.35em;
-		line-height: 1.5em;
+		font-size: 2.5em;
+		line-height: .2em;
+		padding-bottom: .45em;
+		border-bottom: 1px solid var(--main-accent-color);
 	}
 
 	h4 {
@@ -187,7 +197,7 @@
 	}
 
 	header.major {
-		margin: 0 0 6em 0;
+		margin: 0 0 2em 0;
 	}
 
 		header.major h2 {
@@ -196,7 +206,7 @@
 
 		header.major h2, header.major h3, header.major h4, header.major h5, header.major h6 {
 			display: inline-block;
-			margin: 0 0 0.4em;
+			margin: 0 0 0.2em;
 		}
 
 		header.major p {
@@ -470,6 +480,7 @@
 /* Icon */
 
 	.icon {
+		color: black;
 		text-decoration: none;
 		border-bottom: none;
 		position: relative;
@@ -537,7 +548,7 @@
 		}
 
 			.image.rounded img {
-				border: solid 0.5em rgba(144, 144, 144, 0.25);
+				border: solid 0.5em rgba(120, 120, 120);
 				border-radius: 100%;
 			}
 
@@ -569,14 +580,14 @@
 			padding-left: 0.25em;
 		}
 
-	ul {
-		list-style: disc;
-		margin: 0 0 2em 0;
-		padding-left: 1em;
-	}
+		ul {
+		  list-style-type: none;
+		  padding: 0;
+		  border: 0px solid #ddd;
+		}
 
 		ul li {
-			padding-left: 0.5em;
+		  padding: 8px 16px;
 		}
 
 		ul.alt {
@@ -1020,7 +1031,7 @@
 				background-color: rgb(40,40,40, .4);
 				color: #FFFFFF;
 				padding: 2px;
-				border: 1px solid rgb(192, 57, 100, .4);
+				border: 1px solid var(--main-accent-opaque-color);
 				border-radius: 12px;
 			}
 
@@ -1076,7 +1087,7 @@
 			line-height: 1.35;
 			margin-bottom: 0.5em;
 			background-color: rgb(40,40,40, .4);
-			border: 1px solid rgb(192, 57, 100, .4);
+			border: 1px solid var(--main-accent-opaque-color);
 			padding: 2px;
 			border-radius: 12px;
 		}
@@ -1104,8 +1115,12 @@
 		padding: 3em 0 0em 0;
 	}
 
+	.wrapper.style1 {
+		background-color: rgb(180, 180, 180);
+	}
+
 		.wrapper.style2 {
-			background-color: #f6f6f6;
+			background-color: rgb(150, 150, 150);
 		}
 
 		.wrapper.style3 {
@@ -1131,7 +1146,7 @@
 
 	#footer {
 		padding: 8em 0 6em 0;
-		background: #f6f6f6;
+		background-color: rgb(180, 180, 180);
 		color: #aaa;
 		text-align: center;
 	}
@@ -1142,7 +1157,7 @@
 			-o-transition: color 0.2s ease-in-out;
 			-ms-transition: color 0.2s ease-in-out;
 			transition: color 0.2s ease-in-out;
-			color: #aaa;
+			color: black;
 			text-decoration: none;
 		}
 
@@ -1163,6 +1178,7 @@
 				}
 
 		#footer .copyright {
+			color: black;
 			margin: 2em 0;
 			padding: 0;
 			text-align: center;
@@ -1182,22 +1198,182 @@
 					padding-left: 0;
 				}
 
-/* TIMELINE */
+				/* TOP NAVIGATION BAR */
+				/* Add a black background color to the top navigation */
+				.topnav {
+				  background-color: rgb(40,40,40, .7);
+				  overflow: hidden;
+					border: 1px solid var(--main-accent-opaque-color);
+				}
 
+				/* Style the links inside the navigation bar */
+				.topnav a {
+				  float: right;
+				  display: block;
+				  color: #f2f2f2;
+				  text-align: center;
+				  padding: 14px 16px;
+				  text-decoration: none;
+				  font-size: 17px;
+				}
 
-#cd-timeline {
-  position: relative;
-  padding: 2em 0;
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
-#cd-timeline::before {
-  /* this is the vertical line */
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 18px;
-  height: 100%;
-  width: 4px;
-  background: #d7e4ed;
+				/* Change the color of links on hover */
+				.topnav a:hover {
+				  background-color: #ddd;
+				  color: black;
+				}
+
+				/* Add an active class to highlight the current page */
+				.active {
+				  background-color:var(--main-accent-color);
+;
+				  color: white;
+				}
+				/* Hide the link that should open and close the topnav on small screens */
+				.topnav .icon {
+				  display: none;
+				}
+
+				/* Adds color to line section breaks */
+				hr {
+				    height: 0px;
+				    color: var(--main-accent-color);
+				    background-color: var(--main-accent-color);
+				    border-top: solid 2px;
+				}
+
+				/* TIMELINE */
+				/* Import */
+
+			@import url('https://fonts.googleapis.com/css?family=Chivo:300,300i,400,400i,700,700i,900,900i|Saira+Extra+Condensed:100,200,300,400,500,600,700,800|Saira:100,200,300,400,500,600,700,800');
+
+			/* Variables */
+
+			/* Timeline */
+
+			.timeline {
+			  border-left: 4px solid var(--main-accent-color);
+			  background: rgb(165, 165, 165);
+			  color: fade(white, 80%);
+			  margin: 50px auto;
+			  letter-spacing: 0.5px;
+			  position: relative;
+			  line-height: 1.4em;
+			  font-size: 1.03em;
+			  padding: 50px;
+			  padding-bottom: 0px;
+			  list-style: none;
+			  text-align: left;
+			  font-weight: 100;
+			  max-width: 50%;
+			  }
+
+			.event {
+			    padding-top: 0px;
+			    padding-bottom: -10px;
+			    margin: 0px;
+					border-bottom: 1px dashed #ddd;
+			  }
+
+			.last-event {
+					padding-top: 0px;
+					padding-bottom: -10px;
+					margin: 0px;
+				}
+
+			  .event-title {
+					font-family: 'Saira', sans-serif;
+			    letter-spacing: 1.3px;
+			    font-weight: 500;
+			    font-size: 1.2em;
+			    margin-top: 25px;
+			    margin-bottom: 0px;
+					border: none;
+			  }
+
+			.timeline-circle {
+			  position: relative;
+			  width: 16px;
+			  height: 16px;
+			  top: -20px;
+			  left: -76px;
+			  background: rgb(165, 165, 165);
+			  -moz-border-radius: 60px;
+			  -webkit-border-radius: 60px;
+			  border-radius: 50%;
+			  border: 3px solid var(--main-accent-color);
+			  margin: 0px;
+			}
+
+			.date {
+			  font-weight: 100;
+			  font-size: 0.9em;
+			  position: relative;
+			  top: -40px;
+			  left: -130px;
+			  margin: 0px;
+			}
+
+			.timeline-description {
+			  position: relative;
+			  top: -35px;
+			}
+
+			/* Splits wrapper sections in half, left and right*/
+
+			.left-section {
+				background: rgb(180, 180, 180);
+		    float: left;
+		    width: 50%;
+				margin-bottom: 5em;
+			}
+
+			.right-section {
+				background: rgb(180, 180, 180);
+		    float: left;
+		    width: 50%;
+				margin-bottom: 5em;
+			}
+			.double-section-content {
+				position: relative;
+				left: 20%;
+			}
+
+			.classes-left-section {
+				text-align: center;
+				display: inline-block;
+				background: rgb(180, 180, 180);
+				float: left;
+				width: 50%;
+				margin-bottom: 5em;
+			}
+
+			.classes-right-section {
+				text-align: left;
+				display: inline-block;
+				align-content: right;
+				background: rgb(180, 180, 180);
+				float: left;
+				width: 50%;
+				margin-bottom: 5em;
+			}
+
+			/* Skills section*/
+
+			.centered {
+				 margin: auto; max-width: 60%;
+			 }
+
+			.skills-column {
+				margin: auto; width: 33%;
+			}
+			.skill {
+				background-color: rgb(150, 150, 150);
+				border: solid rgb(90, 90, 90) 1px;
+				padding: 16px;
+				margin: 25px;
+				text-align: center;
+			}
+
+  }
 }
