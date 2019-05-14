@@ -4,14 +4,6 @@
 
 <style> /* set the CSS */
 
-/* basic positioning */
-.legend { list-style: none; }
-.legend li { float: left; margin-right: 10px; }
-.legend span { border: 1px solid #ccc; float: left; width: 12px; height: 12px; margin: 2px; }
-/* your colors */
-.legend .Browns { background-color: #FF7F00; }
-.legend .Bengals { background-color: #FB4F14; }
-
 body {
   font-size: 14px;
   font-family: "Source Code Pro", Consolas, monaco, monospace;
@@ -129,7 +121,7 @@ input {
 <svg width="1000" height="5" id="top_text">
   <i> Click on a stat to begin visualizing </i>
   <br>
-  <b> Passing Stats </b>
+  <b> Class </b>
   </br>
   <div id='vis-container'></div>
 </svg>
@@ -140,13 +132,6 @@ input {
 </svg>
 <svg width="1000" height="20" id="svg2">
  </svg>
- <ul class="legend">
-    <li><span class="Browns"></span> Cleveland Browns </li>
-    <li><span class="Bengals"></span> Cincinatti Bengals</li>
-    <br>
-    <b>  </b>
-    </br>
-</ul>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-array/1.2.2/d3-array.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>
@@ -159,23 +144,18 @@ input {
 <script id="brushing">// quantitative colour scale
 // load csv file and create the chart
 d3.csv('nfl_stats.csv', function(data) {
-	data.forEach(function(v){
-		v["Avg"]= + v["Avg"];
-	});
-
 	data2 = data.filter(function(data) {
-		return data["Stat"] == "Comp";
+		return data["Class"] == "H";
 	});
-
+console.log(data)
 function MakeGraph(data2) {
-  var indexes = [0, 1, 2, 3];
   var avg_array = [];
   data2.forEach(function(d, i){
     avg_array[i] = d["Avg"];
   });
   stat_max = d3.max(avg_array);
   stat_min = d3.min(avg_array);
-
+  console.log(avg_array)
 	var gradient = d3.scale.linear()
 	  .domain([stat_min, stat_max])
 	  .range(["#add8e6", "#00008b"]);
@@ -192,6 +172,7 @@ function MakeGraph(data2) {
       else {return .02}
       });
 
+	//console.log(x);
   parcoords
     .data(data2)
     .render()
