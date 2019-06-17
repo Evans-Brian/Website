@@ -1,0 +1,130 @@
+<html>
+  <head>
+		<link rel="stylesheet" href="chartFormatting.css" />
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<script type="text/javascript" src="../chartCreationJS/createYearPercentChart.js"></script>
+		<script type="text/javascript" src="../chartCreationJS/createMonthPercentChart.js"></script>
+		<script type="text/javascript" src="../chartCreationJS/createWeekPercentChart.js"></script>
+		<script type="text/javascript" src="../chartCreationJS/createYearTotalChart.js"></script>
+		<script type="text/javascript" src="../chartCreationJS/createMonthTotalChart.js"></script>
+		<script type="text/javascript" src="../chartCreationJS/createWeekTotalChart.js"></script>
+
+		<script>
+			var chart;
+				/* When the user clicks on the button, 
+				toggle between hiding and showing the dropdown content */
+				function myFunction(dropDownNumber) {
+					document.getElementById("myDropdown" + dropDownNumber.toString()).classList.toggle("show");
+				}
+				
+				// Close the dropdown if the user clicks outside of it
+				window.onclick = function(event) {
+					if (!event.target.matches('.dropbtn')) {
+						var dropdowns = document.getElementsByClassName("dropdown-content");
+						var i;
+						for (i = 0; i < dropdowns.length; i++) {
+							var openDropdown = dropdowns[i];
+							if (openDropdown.classList.contains('show')) {
+								openDropdown.classList.remove('show');
+							}
+						}
+					}
+				}
+				</script>
+	
+	</head>
+	
+	<div class="content">
+		<body>
+
+			<h1 style = "position:relative; left:35%; margin:10px">Team Mentions on r/NFL</h1>
+				<br>
+				<div style = "position:relative; left:35%; margin:10px" class="dropdown">
+						<button onclick="chartCreationJS/createYearTotalChart()" class="dropbtn">Yearly Mentions &nbsp;&nbsp;&nbsp;</button>
+					</div>
+				<div style = "position:relative; left:35%; margin:10px" class="dropdown">
+						<button id="3" onclick="myFunction(this.id)" class="dropbtn">Monthly Mentions &nbsp;&nbsp;&nbsp;</button>
+						<div id="myDropdown3" class="dropdown-content">
+							<a onclick="createMonthTotalChart(2011)">2011</a>
+							<a onclick="createMonthTotalChart(2012)">2012</a>
+							<a onclick="createMonthTotalChart(2013)">2013</a>
+							<a onclick="createMonthTotalChart(2014)">2014</a>
+							<a onclick="createMonthTotalChart(2015)">2015</a>
+							<a onclick="createMonthTotalChart(2016)">2016</a>
+							<a onclick="createMonthTotalChart(2017)">2017</a>
+							<a onclick="createMonthTotalChart(2018)">2018</a>
+							<a onclick="createMonthTotalChart(2019)">2019</a>
+						</div>
+					</div>
+				<div style = "position:relative; left:35%; margin:10px" class="dropdown">
+						<button id="4" onclick="myFunction(this.id)" class="dropbtn">Weekly Mentions &nbsp;&nbsp;&nbsp;</button>
+						<div id="myDropdown4" class="dropdown-content">
+							<a onclick="createWeekTotalChart('2011 Preseason')">2011 Preseason</a>
+							<a onclick="createWeekTotalChart('2011-2012 Season')">2011-2012 Season</a>
+							<a onclick="createWeekTotalChart('2012 Preseason')">2012 Preseason</a>
+							<a onclick="createWeekTotalChart('2012-2013 Season')">2012-2013 Season</a>
+							<a onclick="createWeekTotalChart('2013 Preseason')">2013 Preseason</a>
+							<a onclick="createWeekTotalChart('2013-2014 Season')">2013-2014 Season</a>
+							<a onclick="createWeekTotalChart('2014 Preseason')">2014 Preseason</a>
+							<a onclick="createWeekTotalChart('2014-2015 Season')">2014-2015 Season</a>
+							<a onclick="createWeekTotalChart('2015 Preseason')">2015 Preseason</a>
+							<a onclick="createWeekTotalChart('2015-2016 Season')">2015-2016 Season</a>
+							<a onclick="createWeekTotalChart('2016 Preseason')">2016 Preseason</a>
+							<a onclick="createWeekTotalChart('2016-2017 Season')">2016-2017 Season</a>
+							<a onclick="createWeekTotalChart('2017 Preseason')">2017 Preseason</a>
+							<a onclick="createWeekTotalChart('2017-2018 Season')">2017-2018 Season</a>
+							<a onclick="createWeekTotalChart('2018 Preseason')">2018 Preseason</a>
+							<a onclick="createWeekTotalChart('2018-2019 Season')">2018-2019 Season</a>
+							<a onclick="createWeekTotalChart('2019 Preseason')">2019 Preseason</a>
+						</div>
+					</div>
+				<br>
+				<div style = "position:relative; left:35%; margin:10px" class="dropdown">
+						<button onclick="createYearPercentChart()" class="dropbtn">Yearly % Mentions</button>
+					</div>
+				<div style = "position:relative; left:35%; margin:10px" class="dropdown">
+						<button id="1" onclick="myFunction(this.id)" class="dropbtn">Monthly % Mentions</button>
+						<div id="myDropdown1" class="dropdown-content">
+							<a onclick="createMonthPercentChart(2011)">2011</a>
+							<a onclick="createMonthPercentChart(2012)">2012</a>
+							<a onclick="createMonthPercentChart(2013)">2013</a>
+							<a onclick="createMonthPercentChart(2014)">2014</a>
+							<a onclick="createMonthPercentChart(2015)">2015</a>
+							<a onclick="createMonthPercentChart(2016)">2016</a>
+							<a onclick="createMonthPercentChart(2017)">2017</a>
+							<a onclick="createMonthPercentChart(2018)">2018</a>
+							<a onclick="createMonthPercentChart(2019)">2019</a>
+						</div>
+					</div>
+				<div style = "position:relative; left:35%; margin:10px" class="dropdown">
+						<button id="2" onclick="myFunction(this.id)" class="dropbtn">Weekly % Mentions</button>
+						<div id="myDropdown2" class="dropdown-content">
+							<a onclick="createWeekPercentChart('2011 Preseason')">2011 Preseason</a>
+							<a onclick="createWeekPercentChart('2011-2012 Season')">2011-2012 Season</a>
+							<a onclick="createWeekPercentChart('2012 Preseason')">2012 Preseason</a>
+							<a onclick="createWeekPercentChart('2012-2013 Season')">2012-2013 Season</a>
+							<a onclick="createWeekPercentChart('2013 Preseason')">2013 Preseason</a>
+							<a onclick="createWeekPercentChart('2013-2014 Season')">2013-2014 Season</a>
+							<a onclick="createWeekPercentChart('2014 Preseason')">2014 Preseason</a>
+							<a onclick="createWeekPercentChart('2014-2015 Season')">2014-2015 Season</a>
+							<a onclick="createWeekPercentChart('2015 Preseason')">2015 Preseason</a>
+							<a onclick="createWeekPercentChart('2015-2016 Season')">2015-2016 Season</a>
+							<a onclick="createWeekPercentChart('2016 Preseason')">2016 Preseason</a>
+							<a onclick="createWeekPercentChart('2016-2017 Season')">2016-2017 Season</a>
+							<a onclick="createWeekPercentChart('2017 Preseason')">2017 Preseason</a>
+							<a onclick="createWeekPercentChart('2017-2018 Season')">2017-2018 Season</a>
+							<a onclick="createWeekPercentChart('2018 Preseason')">2018 Preseason</a>
+							<a onclick="createWeekPercentChart('2018-2019 Season')">2018-2019 Season</a>
+							<a onclick="createWeekPercentChart('2019 Preseason')">2019 Preseason</a>
+						</div>
+					</div>
+
+
+
+			<div id="chart"></div>
+
+		</body>
+	</div>
+</html>
