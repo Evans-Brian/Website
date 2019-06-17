@@ -1,6 +1,6 @@
 function createWeekTotalChart(input){
+	d3.select("svg").remove();
 	var data;
-	console.log(input)
 	$.getJSON("../countData/weekCounts-" + input.replace( /\s/g, '') + ".json", function(json){
 	    data = json;
 
@@ -28,7 +28,6 @@ function createWeekTotalChart(input){
 }
 
 
-	console.log(data)
 	/* Format Data */
 	var parseDate = d3.timeParse("%Y-%m-%W");
 	data.forEach(function(d, i) {

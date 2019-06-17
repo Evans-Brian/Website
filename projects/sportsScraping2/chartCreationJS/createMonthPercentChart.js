@@ -1,4 +1,5 @@
 function createMonthPercentChart(input){
+	d3.select("svg").remove();
 	var data;
 	$.getJSON("../countData/monthCounts-" + input.toString() + ".json", function(json){
 	    data = json;

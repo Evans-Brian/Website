@@ -1,6 +1,7 @@
 function createYearTotalChart(){
+	d3.select("svg").remove();
 	var data;
-	$.getJSON("../yearCounts.json", function(json){
+	$.getJSON("../countData/yearCounts.json", function(json){
 	    data = json;
 
 	var width = 1700;
