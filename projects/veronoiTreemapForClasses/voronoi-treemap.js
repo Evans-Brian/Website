@@ -1,6 +1,7 @@
 //begin: constants
 var _2PI = 2*Math.PI;
 //end: constants
+console.log("test")
 //begin: layout conf.
 var svgWidth = 900,
     svgHeight = 725,
