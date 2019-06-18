@@ -1,7 +1,6 @@
 //begin: constants
 var _2PI = 2*Math.PI;
 //end: constants
-console.log("test")
 //begin: layout conf.
 var svgWidth = 900,
     svgHeight = 725,
@@ -31,8 +30,7 @@ var fontScale = d3.scaleLinear();
 var svg, drawingArea, treemapContainer;
 //end: reusable d3Selection
 
-console.log("testingg")
-d3.json("https://cdn.jsdelivr.net/gh/Evans-Brian/Website/projects/veronoiTreemapForClasses/classedds.json", function(error, rootData) {
+d3.json("https://cdn.jsdelivr.net/gh/Evans-Brian/Website/projects/veronoiTreemapForClasses/classes.json", function(error, rootData) {
   if (error) throw error;
 
   initData();
