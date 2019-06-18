@@ -32,7 +32,7 @@ var svg, drawingArea, treemapContainer;
 //end: reusable d3Selection
 
 console.log("testingg")
-d3.json("https://cdn.jsdelivr.net/gh/Evans-Brian/Website/projects/veronoiTreemapForClasses/classes.json", function(error, rootData) {
+d3.json("https://cdn.jsdelivr.net/gh/Evans-Brian/Website/projects/veronoiTreemapForClasses/classedds.json", function(error, rootData) {
   if (error) throw error;
 
   initData();
