@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<title>NFL Stat Visualizer</title>
+
+<style> /* set the CSS */
+
+body {
+  font-size: 14px;
+  font-family: "Source Code Pro", Consolas, monaco, monospace;
+  margin: 10px auto 10px;
+  width: 1000px;
+  line-height: 1.45em;
+}
+a {
+  color: #454545;
+}
+a:hover {
+  color: #000;
+}
+ul {
+  margin: 0 10px;
+  padding: 0;
+}
+.dark {
+  background: #222;
+}
+#example {
+  min-height: 400px;
+  margin: 10px 0;
+}
+p {
+  width: 560px;
+}
+pre {
+  color: #444;
+  font-family: Ubuntu Mono, Monaco, monospace;
+  padding: 4px 8px;
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+}
+h1 small {
+  font-weight: normal;
+  font-size: 0.5em;
+}
+h3 {
+  margin-top: 40px;
+}
+.float {
+  float: left;
+}
+.centered {
+  text-align: center;
+}
+.hide {
+  display: none;
+}
+input {
+  font-size: 16px;
+}
+
+/* data table styles */
+  #grid { height: 940px; }
+  .row, .header { clear: left; font-size: 10px; line-height: 20px; height: 20px; }
+  .row:nth-child(odd) { background: rgba(0,0,0,0.05); }
+  .header { font-weight: bold; }
+  .cell { float: left; overflow: hidden; white-space: nowrap; width: 40px; height: 18px; }
+  .col-0 { width: 60px; }
+
+
+/* parcoords styles */
+.parcoords > svg, .parcoords > canvas {
+  font: 11px "Source Code Pro", Consolas, monaco, monospace;
+  position: absolute;
+}
+.parcoords > canvas {
+  pointer-events: none;
+}
+
+.parcoords text.label {
+  cursor: default;
+}
+
+.parcoords rect.background {
+  fill: transparent;
+}
+.parcoords rect.background:hover {
+  fill: rgba(120,120,120,0.2);
+}
+.parcoords .resize rect {
+  fill: rgba(0,0,0,0.1);
+}
+.parcoords rect.extent {
+  fill: rgba(255,255,255,0.25);
+  stroke: rgba(0,0,0,0.6);
+}
+.parcoords .axis line, .parcoords .axis path {
+  fill: none;
+  stroke: #454545;
+  shape-rendering: crispEdges;
+}
+.parcoords canvas {
+  opacity: 1;
+  -moz-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+}
+.parcoords canvas.faded {
+  opacity: 0.25;
+}
+.parcoords {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+</style>
+<body>
+<svg width="1000" height="5" id="top_text">
+  <i> Click on a stat to begin visualizing </i>
+  <br>
+  <b> Class </b>
+  </br>
+  <div id='vis-container'></div>
+</svg>
+<svg width="1000" height="10" id="svg1"></svg>
+<svg width="1000" height="5" id="mid_text">
+  <b> Rushing Stats </b>
+    <div id='vis-container2'></div>
+</svg>
+<svg width="1000" height="20" id="svg2">
+ </svg>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-array/1.2.2/d3-array.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>
+<script src="d3.parcoords.js"></script>
+<script src="divgrid.js"></script>
+<script src="https://d3js.org/d3-array.v2.min.js"></script>
+<div id="example" class="parcoords"></div>
+<div id="grid"></div>
+
+<script id="brushing">// quantitative colour scale
+// load csv file and create the chart
+d3.csv('nfl_stats.csv', function(data) {
+	data2 = data.filter(function(data) {
+		return data["Class"] == "H";
+	});
+console.log(data)
+function MakeGraph(data2) {
+  var avg_array = [];
+  data2.forEach(function(d, i){
+    avg_array[i] = d["Avg"];
+  });
+  stat_max = d3.max(avg_array);
+  stat_min = d3.min(avg_array);
+  console.log(avg_array)
+	var gradient = d3.scale.linear()
+	  .domain([stat_min, stat_max])
+	  .range(["#add8e6", "#00008b"]);
+
+	var parcoords = d3.parcoords()("#example")
+	  .color(function(d){
+      if(d.Team == "CLE") { return "#FF7F00"}//#8B4513
+      if(d.Team == "CIN") { return "#FB4F14"}
+      else {return gradient(d.Avg);}
+	  })
+	  .alpha(function(d){
+	  if(d.Team == "CLE") { return 1}
+      if(d.Team == "CIN") { return 1}
+      else {return .02}
+      });
+
+	//console.log(x);
+  parcoords
+    .data(data2)
+    .render()
+    .brushMode("1D-axes");  // enable brushing
+
+  // create data table, row hover highlighting
+  var grid = d3.divgrid();
+  d3.select("#grid")
+    .datum(data2)
+    .call(grid)
+    .selectAll(".row")
+    .on({
+      "mouseover": function(d) { parcoords.highlight([d]) },
+      "mouseout": parcoords.unhighlight
+    });
+
+  // update data table on brush event
+  parcoords.on("brush", function(d) {
+    d3.select("#grid")
+      .datum(d)
+      .call(grid)
+      .selectAll(".row")
+      .on({
+        "mouseover": function(d) { parcoords.highlight([d]) },
+        "mouseout": parcoords.unhighlight
+      });
+  });
+  };
+  //Initial Graph
+  	MakeGraph(data2);
+
+	//DropDownBoxes
+  	var x = ['COMP', 'ATT-P', 'PCT', 'YDS-P','AVG-P','P-YDsPerGm','TD-P','INT','QBR', 'LNG'];
+	var y = ['ATT-R', 'YDS-R','AVG-R','R-YDsPerGm','TD-R','BIG','FUM', 'FUML'];
+	var dropdownChange = function() {
+		d3.selectAll("#example > *").remove();
+		var val = d3.select(this).property('value'),
+		data1 = data.filter(function(d2) {
+				return d2["Stat"] == val;
+		});
+		MakeGraph(data1);
+	};
+  var dropdown = d3.select("#vis-container")
+		.insert("select", "svg")
+		.on("change", dropdownChange);
+
+	dropdown.selectAll("option")
+		.data(x)
+	  .enter().append("option")
+		.attr("value", function (d) { return d; })
+		.text(function (d) {
+			return d[0].toUpperCase() + d.slice(1,d.length); // capitalize 1st letter
+		});
+  var dropdown2 = d3.select("#vis-container2")
+	.insert("select", "svg")
+	.on("change", dropdownChange);
+
+dropdown2.selectAll("option")
+	.data(y)
+  .enter().append("option")
+	.attr("value", function (d) { return d; })
+	.text(function (d) {
+		return d[0].toUpperCase() + d.slice(1,d.length); // capitalize 1st letter
+	});
+
+});
+</script>
+
+</body>
+</html>
