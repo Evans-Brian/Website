@@ -31,7 +31,7 @@ var fontScale = d3.scaleLinear();
 var svg, drawingArea, treemapContainer;
 //end: reusable d3Selection
 
-d3.json("classes.json", function(error, rootData) {
+d3.json("https://cdn.jsdelivr.net/gh/Evans-Brian/Website/projects/veronoiTreemapForClasses/classes.json", function(error, rootData) {
   if (error) throw error;
 
   initData();
