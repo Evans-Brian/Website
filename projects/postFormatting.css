@@ -47,6 +47,11 @@ The content `<div>` is where all your content goes.
     line-height: 1.6em;
 }
 
+.chart {
+    position: relative;
+    left: 200px;
+}
+
 .header {
      margin: 0;
      color: #333;

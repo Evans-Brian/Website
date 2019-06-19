@@ -25,10 +25,6 @@
 <body>
 
 
-
-
-
-
 <div id="layout">
     <!-- Menu toggle -->
     <a href="#menu" id="menuLink" class="menu-link">
@@ -57,11 +53,6 @@
         <div class="header">
             <h1>Page Title</h1>
             <h2>A subtitle for your page goes here</h2>
-        </div>
-
-        <div class="content">
- 
-
         </div>
     </div>
 </div>
@@ -103,13 +94,13 @@
 
 </head>
 
-<div class="content">
+<div class="chart">
     <body>
             <br>
-            <div style = "position:relative; left:22%; margin:8px" class="dropdown">
+            <div style = "position:relative; left:31%; margin:8px" class="dropdown">
                     <button onclick="createYearTotalChart()" class="dropbtn">Yearly Mentions &nbsp;&nbsp;&nbsp;</button>
                 </div>
-            <div style = "position:relative; left:22%; margin:8px" class="dropdown">
+            <div style = "position:relative; left:31%; margin:8px" class="dropdown">
                     <button id="3" onclick="myFunction(this.id)" class="dropbtn">Monthly Mentions &nbsp;&nbsp;&nbsp;</button>
                     <div id="myDropdown3" class="dropdown-content">
                         <a onclick="createMonthTotalChart(2011)">2011</a>
@@ -123,7 +114,7 @@
                         <a onclick="createMonthTotalChart(2019)">2019</a>
                     </div>
                 </div>
-            <div style = "position:relative; left:22%; margin:8px" class="dropdown">
+            <div style = "position:relative; left:31%; margin:8px" class="dropdown">
                     <button id="4" onclick="myFunction(this.id)" class="dropbtn">Weekly Mentions &nbsp;&nbsp;&nbsp;</button>
                     <div id="myDropdown4" class="dropdown-content">
                         <a onclick="createWeekTotalChart('2011 Preseason')">2011 Preseason</a>
@@ -146,10 +137,10 @@
                     </div>
                 </div>
             <br>
-            <div style = "position:relative; left:22%; margin:8px" class="dropdown">
+            <div style = "position:relative; left:31%; margin:8px" class="dropdown">
                     <button onclick="createYearPercentChart()" class="dropbtn">Yearly % Mentions</button>
                 </div>
-            <div style = "position:relative; left:22%; margin:8px" class="dropdown">
+            <div style = "position:relative; left:31%; margin:8px" class="dropdown">
                     <button id="1" onclick="myFunction(this.id)" class="dropbtn">Monthly % Mentions</button>
                     <div id="myDropdown1" class="dropdown-content">
                         <a onclick="createMonthPercentChart(2011)">2011</a>
@@ -163,7 +154,7 @@
                         <a onclick="createMonthPercentChart(2019)">2019</a>
                     </div>
                 </div>
-            <div style = "position:relative; left:22%; margin:8px" class="dropdown">
+            <div style = "position:relative; left:31%; margin:8px" class="dropdown">
                     <button id="2" onclick="myFunction(this.id)" class="dropbtn">Weekly % Mentions</button>
                     <div id="myDropdown2" class="dropdown-content">
                         <a onclick="createWeekPercentChart('2011 Preseason')">2011 Preseason</a>
@@ -185,8 +176,9 @@
                         <a onclick="createWeekPercentChart('2019 Preseason')">2019 Preseason</a>
                     </div>
                 </div>
-
-        <div id="chart"></div>
+            
+            <div id="chart"></div>
+        </div>
 
         <div class="content">
             <h2 class="content-subhead">How to use this layout</h2>

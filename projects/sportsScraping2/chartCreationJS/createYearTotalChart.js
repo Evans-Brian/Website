@@ -4,8 +4,8 @@ function createYearTotalChart(){
 	$.getJSON("../countData/yearCounts.json", function(json){
 	    data = json;
 
-	var width = 1500;
-	var height = 850;
+	var width = 1250;
+	var height = 750;
 	var margin = 325;
 	var duration = 150;
 
@@ -62,12 +62,12 @@ function createYearTotalChart(){
 	/* Add SVG */
 	var svg = d3.select("#chart").append("svg")
 	  .attr("width", (width+margin)+"px")
-	  .attr("height", (height+margin)+"px")
+	  .attr("height", (height+margin/2)+"px")
 	  .append('g')
 	  .attr("transform", `translate(${margin}, ${margin})`);
 
 	/* Changes svg position */
-	$("svg").css({top: -250, left: -350, position:'relative'});
+	$("svg").css({top: -250, position:'relative'});
 
 	var line = d3.line()
 	  .x(d => xScale(d.date))
