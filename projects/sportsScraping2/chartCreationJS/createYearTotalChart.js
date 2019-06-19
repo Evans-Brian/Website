@@ -62,16 +62,9 @@ function createYearTotalChart(){
 	/* Add SVG */
 	var svg = d3.select("#chart").append("svg")
 	  .attr("width", (width+margin)+"px")
-	  .attr("height", (height+margin-200)+"px")
+	  .attr("height", (height+margin)+"px")
 	  .append('g')
 	  .attr("transform", `translate(${margin}, ${margin})`);
-
-	svg.append("text")
-	  .attr("x", (width*.41))             
-	  .attr("y", -150)
-	  .attr("text-anchor", "middle")  
-	  .style("font-size", "40px") 
-	  .text("Team Mentions");
 
 	/* Changes svg position */
 	$("svg").css({top: -250, left: -350, position:'relative'});
