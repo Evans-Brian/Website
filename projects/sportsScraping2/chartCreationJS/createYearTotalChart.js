@@ -13,7 +13,7 @@ function createYearTotalChart(){
 	var lineOpacityHover = "1";
 	var otherLinesOpacityHover = "0.1";
 	var lineStroke = "4px";
-	var lineStrokeHover = "6.5px";
+	var lineStrokeHover = "5.5px";
 
 	var circleOpacity = '0.99';
 	var otherCirclesOpacityOnHover = "0.1"
@@ -69,6 +69,7 @@ function createYearTotalChart(){
 	/* Changes svg position */
 	$("svg").css({top: -250, position:'relative'});
 
+	/* Add line into SVG */
 	var line = d3.line()
 	  .x(d => xScale(d.date))
 	  .y(d => yScale(d.count))
@@ -259,7 +260,7 @@ function createYearTotalChart(){
 	  .attr("fill", "#000")
 	  .text("Total Mentions");
 
-			x = width + 80
+			x = width + 20
 			y = 225
 
 				for(var i = 0; i < data.length; i++) {
@@ -267,14 +268,14 @@ function createYearTotalChart(){
 					data[i]['y'] = y
 
 					if (i == data.length/2){
-						x = width + 205
+						x = width + 125
 						y = 225
 					}
 					if (i => data.length/2){
 						data[i]['x'] = x
 						data[i]['y'] = y
 					}
-					y = y + 50
+					y = y + 38
 				}
 
 			var svg = d3.select("svg");
@@ -286,13 +287,13 @@ function createYearTotalChart(){
 			teamLabels.attr("x", d=>d['x'])
 				.data(data)
 				.attr("y", d=>d['y'])
-				.attr("width", '118')
-				.attr("height", "43")
+				.attr("width", '100')
+				.attr("height", "30")
 				.attr('team', d=>d['team'])
 				.attr('conference', d=>d['conference'])
 				.attr('division', d=>d['division'])
 				.attr('stroke', d=>d['secondaryColor'])
-				.attr('stroke-width', 4)
+				.attr('stroke-width', 3)
 				.style('fill', d=>d['primaryColor'])
 				.on("click", function(d){
 					active = true;
@@ -308,7 +309,7 @@ function createYearTotalChart(){
 							d3.selectAll("[team=" + d.team + "]")
 								  .attr("r", circleRadiusHover)
 									.style('opacity', lineOpacityHover)
-									.style("stroke-width", lineStrokeHover);
+									.style("stroke-width", 5);
 					}else{
 						active = false;
 						d3.select(this).classed("selected", false);
@@ -333,9 +334,9 @@ function createYearTotalChart(){
 					.append("text")
 
 				teamLabelText.text(d=>d['team'])
-					.attr('x', d=>d['x'] + 14)
-					.attr('y', d=>d['y'] + 27)
-					.attr('font-size', '19px')
+					.attr('x', d=>d['x'] + 10)
+					.attr('y', d=>d['y'] + 21)
+					.attr('font-size', '15px')
 					.attr('fill', 'white')
 					.attr('conference', d=>d['conference'])
 					.attr('division', d=>d['division'])
@@ -353,7 +354,7 @@ function createYearTotalChart(){
 								d3.selectAll("[team=" + d.team + "]")
 										.attr("r", circleRadiusHover)
 										.style('opacity', lineOpacityHover)
-										.style("stroke-width", lineStrokeHover);
+										.style("stroke-width", 5);
 						}else{
 							active = false;
 							d3.select(this).classed("selected", false);
@@ -371,8 +372,8 @@ function createYearTotalChart(){
 									}
 					})
 
-					var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':70, 'y':340},
-					{'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':70, 'y':640}]
+					var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':110, 'y':325},
+					{'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':110, 'y':525}]
 
 					var svg = d3.select("svg");
 					var conferenceLabels = svg.selectAll("conferenceLabel")
@@ -382,8 +383,8 @@ function createYearTotalChart(){
 
 					conferenceLabels.attr("x", d=>d['x'])
 						.attr("y", d=>d['y'])
-						.attr("width", '128')
-						.attr("height", "49")
+						.attr("width", '110')
+						.attr("height", "40")
 						.attr('stroke', d=>d['secondaryColor'])
 						.attr('stroke-width', 4)
 						.style('fill', d=>d['primaryColor'])
@@ -402,7 +403,7 @@ function createYearTotalChart(){
 									d3.selectAll("[conference=" + d.conference + "]")
 											.attr("r", circleRadiusHover)
 											.style('opacity', lineOpacityHover)
-											.style("stroke-width", lineStrokeHover);
+											.style("stroke-width", 5);
 							}else{
 								active = false;
 								d3.select(this).classed("selected", false);
@@ -425,9 +426,9 @@ function createYearTotalChart(){
 						  .enter()
 						  .append("text")
 						conferenceLabelsText.text(d=>d['conference'])
-						  .attr('x', d=>d['x'] + 30)
-						  .attr('y', d=>d['y'] + 35)
-							.attr('font-size', '35px')
+						  .attr('x', d=>d['x'] + 25)
+						  .attr('y', d=>d['y'] + 31)
+							.attr('font-size', '30px')
 						  .attr('fill', 'black')
 						  .attr('conference', d=>d['conference'])
 						  .on("click", function(d){
@@ -444,7 +445,7 @@ function createYearTotalChart(){
 						        d3.selectAll("[conference=" + d.conference + "]")
 						            .style('opacity', lineOpacityHover)
 												.attr("r", circleRadiusHover)
-												.style("stroke-width", lineStrokeHover);
+												.style("stroke-width", 5);
 						    }else{
 									active = false;
 						      d3.select(this).classed("selected", false);
@@ -463,15 +464,18 @@ function createYearTotalChart(){
 						  })
 
 
-						var divisions = [{'conference': 'AFC', 'division': 'AFCNorth', 'text': "North", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':75, 'y':400},
-						{'conference': 'AFC', 'division': 'AFCEast',  'text': "East", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':140, 'y':450},
-						{'conference': 'AFC', 'division': 'AFCSouth',  'text': "South", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':75, 'y':500},
-						{'conference': 'AFC', 'division': 'AFCWest',  'text': "West", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':10, 'y':450},
-						{'conference': 'NFC', 'division': 'NFCNorth',  'text': "North", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':75, 'y':700},
-						{'conference': 'NFC', 'division': 'NFCEast',  'text': "East", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':140, 'y':750},
-						{'conference': 'NFC', 'division': 'NFCSouth',  'text': "South", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':75, 'y':800},
-						{'conference': 'NFC', 'division': 'NFCWest',  'text': "West", 'primaryColor': '#013369', 'secondaryColor': '##D3D3D3', 'x':10, 'y':750},
+						var divisions = [{'conference': 'AFC', 'division': 'AFCNorth', 'text': "North", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':375},
+						{'conference': 'AFC', 'division': 'AFCEast',  'text': "East", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':167, 'y':418},
+						{'conference': 'AFC', 'division': 'AFCSouth',  'text': "South", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':461},
+						{'conference': 'AFC', 'division': 'AFCWest',  'text': "West", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':58, 'y':418},
+						{'conference': 'NFC', 'division': 'NFCNorth',  'text': "North", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':575},
+						{'conference': 'NFC', 'division': 'NFCEast',  'text': "East", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':167, 'y':618},
+						{'conference': 'NFC', 'division': 'NFCSouth',  'text': "South", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':661},
+						{'conference': 'NFC', 'division': 'NFCWest',  'text': "West", 'primaryColor': '#013369', 'secondaryColor': '##D3D3D3', 'x':58, 'y':618},
 				]
+
+				// var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':90, 'y':325},
+				// {'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':90, 'y':550}]
 
 				var svg = d3.select("svg");
 				var divisionLabels = svg.selectAll("divisionLabel")
@@ -482,8 +486,8 @@ function createYearTotalChart(){
 				divisionLabels.attr("x", d=>d['x'])
 				  .data(divisions)
 				  .attr("y", d=>d['y'])
-				  .attr("width", '118')
-				  .attr("height", "43")
+				  .attr("width", '100')
+				  .attr("height", "35")
 				  .attr('stroke', d=>d['secondaryColor'])
 				  .attr('stroke-width', 4)
 				  .style('fill', d=>d['primaryColor'])
@@ -503,7 +507,7 @@ function createYearTotalChart(){
 								d3.selectAll("[division=" + d.division + "]")
 										.attr("r", circleRadiusHover)
 										.style('opacity', lineOpacityHover)
-										.style("stroke-width", lineStrokeHover);
+										.style("stroke-width", 5);
 						}else{
 							active = false;
 							d3.select(this).classed("selected", false);
@@ -527,9 +531,9 @@ function createYearTotalChart(){
 					  .append("text")
 
 					divisionLabelsText.text(d=>d['text'])
-					  .attr('x', d=>d['x'] + 30)
-					  .attr('y', d=>d['y'] + 30)
-					  .attr('font-size', '25px')
+					  .attr('x', d=>d['x'] + 23)
+					  .attr('y', d=>d['y'] + 25)
+					  .attr('font-size', '22px')
 					  .attr('fill', 'black')
 					  .attr('division', d=>d['division'])
 					  .on("click", function(d){
@@ -546,7 +550,7 @@ function createYearTotalChart(){
 					        d3.selectAll("[division=" + d.division + "]")
 										.attr("r", circleRadiusHover)
 					          .style('opacity', lineOpacityHover)
-										.style("stroke-width", lineStrokeHover);
+										.style("stroke-width", 5);
 					    }else{
 								active = false;
 					      d3.select(this).classed("selected", false);
