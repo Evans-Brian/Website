@@ -193,6 +193,7 @@
 		font-size: 0.9em;
 		margin-top: -0.6em;
 		line-height: 1.5em;
+		color: var(--main-accent-color);
 	}
 
 	header.major {

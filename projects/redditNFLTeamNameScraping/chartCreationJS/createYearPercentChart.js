@@ -58,38 +58,36 @@ function createYearPercentChart(){
 	  .range([height-margin, 0]);
 
 	var color = d3.scaleOrdinal(d3.schemeCategory10);
-
+	
 	/* Add SVG */
 	var svg = d3.select("#chart").append("svg")
 	  .attr("width", (width+margin)+"px")
-	  .attr("height", (height+margin-200)+"px")
+	  .attr("height", (height-175)+"px")
 	  .append('g')
-	  .attr("transform", `translate(${margin}, ${margin})`);
+	  .attr("transform", `translate(${margin}, ${75})`);
+  
+	  /* Add line into SVG */
+	  var line = d3.line()
+		.x(d => xScale(d.date))
+		.y(d => yScale(d.percent))
+  
+	  let lines = svg.append('g')
+		.attr('class', 'lines');
+	  lines.selectAll('.line-group')
+		.data(data).enter()
+		.append('g')
+		.attr('class', 'line-group')
+		.on("mouseover", function(d, i) {
+			svg.append("text")
+					  .attr("class", "title-text")
+					  .attr('font-size', '35px')
+			  .style("fill", d.primaryColor)
+			  .text(d.team)
+			  .attr("text-anchor", "middle")
+			  .attr("x", (width+margin)/2)
+			  .attr("y", 100);
+		  })
 
-	/* Changes svg position */
-	$("svg").css({top: -250, position:'relative'});
-
-	/* Add line into SVG */
-	var line = d3.line()
-	  .x(d => xScale(d.date))
-	  .y(d => yScale(d.percent))
-
-	let lines = svg.append('g')
-	  .attr('class', 'lines');
-	lines.selectAll('.line-group')
-	  .data(data).enter()
-	  .append('g')
-	  .attr('class', 'line-group')
-	  .on("mouseover", function(d, i) {
-	      svg.append("text")
-					.attr("class", "title-text")
-					.attr('font-size', '35px')
-	        .style("fill", d.primaryColor)
-	        .text(d.team)
-	        .attr("text-anchor", "middle")
-	        .attr("x", (width+margin)/2)
-	        .attr("y", 350);
-	    })
 	  .on("mouseout", function(d) {
 	      svg.select(".title-text")
 	        .transition()
@@ -262,22 +260,22 @@ function createYearPercentChart(){
 	  .attr("fill", "#000")
 	  .text("Percentage of Total Mentions");
 
-		x = width + 20
-		y = 225
+		x = width + 30
+		y = 2
 
 			for(var i = 0; i < data.length; i++) {
 				data[i]['x'] = x
 				data[i]['y'] = y
 
 				if (i == data.length/2){
-					x = width + 125
-					y = 225
+					x = width + 135
+					y = 2
 				}
 				if (i => data.length/2){
 					data[i]['x'] = x
 					data[i]['y'] = y
 				}
-				y = y + 38
+				y = y + 36
 			}
 
 		var svg = d3.select("svg");
@@ -374,8 +372,8 @@ function createYearPercentChart(){
 								}
 				})
 
-				var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':110, 'y':325},
-				{'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':110, 'y':525}]
+				var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':110, 'y':75},
+				{'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':110, 'y':275}]
 
 				var svg = d3.select("svg");
 				var conferenceLabels = svg.selectAll("conferenceLabel")
@@ -466,18 +464,15 @@ function createYearPercentChart(){
 						})
 
 
-					var divisions = [{'conference': 'AFC', 'division': 'AFCNorth', 'text': "North", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':375},
-					{'conference': 'AFC', 'division': 'AFCEast',  'text': "East", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':167, 'y':418},
-					{'conference': 'AFC', 'division': 'AFCSouth',  'text': "South", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':461},
-					{'conference': 'AFC', 'division': 'AFCWest',  'text': "West", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':58, 'y':418},
-					{'conference': 'NFC', 'division': 'NFCNorth',  'text': "North", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':575},
-					{'conference': 'NFC', 'division': 'NFCEast',  'text': "East", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':167, 'y':618},
-					{'conference': 'NFC', 'division': 'NFCSouth',  'text': "South", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':661},
-					{'conference': 'NFC', 'division': 'NFCWest',  'text': "West", 'primaryColor': '#013369', 'secondaryColor': '##D3D3D3', 'x':58, 'y':618},
+					var divisions = [{'conference': 'AFC', 'division': 'AFCNorth', 'text': "North", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':125},
+					{'conference': 'AFC', 'division': 'AFCEast',  'text': "East", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':167, 'y':168},
+					{'conference': 'AFC', 'division': 'AFCSouth',  'text': "South", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':211},
+					{'conference': 'AFC', 'division': 'AFCWest',  'text': "West", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':58, 'y':168},
+					{'conference': 'NFC', 'division': 'NFCNorth',  'text': "North", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':325},
+					{'conference': 'NFC', 'division': 'NFCEast',  'text': "East", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':167, 'y':368},
+					{'conference': 'NFC', 'division': 'NFCSouth',  'text': "South", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':411},
+					{'conference': 'NFC', 'division': 'NFCWest',  'text': "West", 'primaryColor': '#013369', 'secondaryColor': '##D3D3D3', 'x':58, 'y':368},
 			]
-
-			// var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':90, 'y':325},
-			// {'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':90, 'y':550}]
 
 			var svg = d3.select("svg");
 			var divisionLabels = svg.selectAll("divisionLabel")

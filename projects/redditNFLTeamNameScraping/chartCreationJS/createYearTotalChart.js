@@ -62,12 +62,9 @@ function createYearTotalChart(){
 	/* Add SVG */
 	var svg = d3.select("#chart").append("svg")
 	  .attr("width", (width+margin)+"px")
-	  .attr("height", (height+margin/2)+"px")
+	  .attr("height", (height-175)+"px")
 	  .append('g')
-	  .attr("transform", `translate(${margin}, ${margin})`);
-
-	/* Changes svg position */
-	$("svg").css({top: -250, position:'relative'});
+	  .attr("transform", `translate(${margin}, ${75})`);
 
 	/* Add line into SVG */
 	var line = d3.line()
@@ -88,8 +85,9 @@ function createYearTotalChart(){
 	        .text(d.team)
 	        .attr("text-anchor", "middle")
 	        .attr("x", (width+margin)/2)
-	        .attr("y", 350);
-	    })
+	        .attr("y", 100);
+		})
+		
 	  .on("mouseout", function(d) {
 	      svg.select(".title-text")
 	        .transition()
@@ -263,27 +261,30 @@ function createYearTotalChart(){
 			x = width + 20
 			y = 225
 
+			x = width + 30
+			y = 2
+	
 				for(var i = 0; i < data.length; i++) {
 					data[i]['x'] = x
 					data[i]['y'] = y
-
+	
 					if (i == data.length/2){
-						x = width + 125
-						y = 225
+						x = width + 135
+						y = 2
 					}
 					if (i => data.length/2){
 						data[i]['x'] = x
 						data[i]['y'] = y
 					}
-					y = y + 38
+					y = y + 36
 				}
-
+	
 			var svg = d3.select("svg");
 			var teamLabels = svg.selectAll("teamLabel")
 				.data(data)
 				.enter()
 				.append("rect")
-
+	
 			teamLabels.attr("x", d=>d['x'])
 				.data(data)
 				.attr("y", d=>d['y'])
@@ -307,7 +308,7 @@ function createYearTotalChart(){
 							.style('opacity', otherLinesOpacityHover);
 						d3.select(this)
 							d3.selectAll("[team=" + d.team + "]")
-								  .attr("r", circleRadiusHover)
+									.attr("r", circleRadiusHover)
 									.style('opacity', lineOpacityHover)
 									.style("stroke-width", 5);
 					}else{
@@ -326,13 +327,13 @@ function createYearTotalChart(){
 								.style("stroke-width", lineStroke);
 							}
 				})
-
-
+	
+	
 				var teamLabelText = svg.selectAll("teamLabelText")
 					.data(data)
 					.enter()
 					.append("text")
-
+	
 				teamLabelText.text(d=>d['team'])
 					.attr('x', d=>d['x'] + 10)
 					.attr('y', d=>d['y'] + 21)
@@ -371,16 +372,16 @@ function createYearTotalChart(){
 										.style("stroke-width", lineStroke);
 									}
 					})
-
-					var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':110, 'y':325},
-					{'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':110, 'y':525}]
-
+	
+					var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':110, 'y':75},
+					{'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':110, 'y':275}]
+	
 					var svg = d3.select("svg");
 					var conferenceLabels = svg.selectAll("conferenceLabel")
 						.data(conferences)
 						.enter()
 						.append("rect")
-
+	
 					conferenceLabels.attr("x", d=>d['x'])
 						.attr("y", d=>d['y'])
 						.attr("width", '110')
@@ -420,77 +421,74 @@ function createYearTotalChart(){
 										.style("stroke-width", lineStroke);
 									}
 						})
-
+	
 						var conferenceLabelsText = svg.selectAll("conferenceLabelText")
-						  .data(conferences)
-						  .enter()
-						  .append("text")
+							.data(conferences)
+							.enter()
+							.append("text")
 						conferenceLabelsText.text(d=>d['conference'])
-						  .attr('x', d=>d['x'] + 25)
-						  .attr('y', d=>d['y'] + 31)
+							.attr('x', d=>d['x'] + 25)
+							.attr('y', d=>d['y'] + 31)
 							.attr('font-size', '30px')
-						  .attr('fill', 'black')
-						  .attr('conference', d=>d['conference'])
-						  .on("click", function(d){
-						    if (!d3.select(this).classed("selected") ){
+							.attr('fill', 'black')
+							.attr('conference', d=>d['conference'])
+							.on("click", function(d){
+							if (!d3.select(this).classed("selected") ){
 									active = true;
-						      d3.select(this).classed("selected", true)
-						      d3.selectAll('.line')
-						        .style('opacity', otherLinesOpacityHover);
-						      d3.selectAll('.circle')
-						          .style('opacity', otherLinesOpacityHover);
-						      d3.selectAll('rect')
-						          .style('opacity', otherLinesOpacityHover);
-						      d3.select(this)
-						        d3.selectAll("[conference=" + d.conference + "]")
-						            .style('opacity', lineOpacityHover)
+								d3.select(this).classed("selected", true)
+								d3.selectAll('.line')
+								.style('opacity', otherLinesOpacityHover);
+								d3.selectAll('.circle')
+									.style('opacity', otherLinesOpacityHover);
+								d3.selectAll('rect')
+									.style('opacity', otherLinesOpacityHover);
+								d3.select(this)
+								d3.selectAll("[conference=" + d.conference + "]")
+									.style('opacity', lineOpacityHover)
 												.attr("r", circleRadiusHover)
 												.style("stroke-width", 5);
-						    }else{
+							}else{
 									active = false;
-						      d3.select(this).classed("selected", false);
-						      d3.selectAll('.line')
-						        .style('opacity', lineOpacityHover)
-						        .style("stroke-width", lineStroke);
-						      d3.selectAll('.circle')
+								d3.select(this).classed("selected", false);
+								d3.selectAll('.line')
+								.style('opacity', lineOpacityHover)
+								.style("stroke-width", lineStroke);
+								d3.selectAll('.circle')
 										.attr("r", circleRadius)
-						      	.style('opacity', lineOpacityHover);
-						      d3.selectAll('rect')
-						        .style('opacity', lineOpacityHover);
+									.style('opacity', lineOpacityHover);
+								d3.selectAll('rect')
+								.style('opacity', lineOpacityHover);
 									d3.select(this)
 										d3.selectAll("[conference=" + d.conference + "]")
 											.style("stroke-width", lineStroke);
-						        }
-						  })
-
-
-						var divisions = [{'conference': 'AFC', 'division': 'AFCNorth', 'text': "North", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':375},
-						{'conference': 'AFC', 'division': 'AFCEast',  'text': "East", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':167, 'y':418},
-						{'conference': 'AFC', 'division': 'AFCSouth',  'text': "South", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':461},
-						{'conference': 'AFC', 'division': 'AFCWest',  'text': "West", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':58, 'y':418},
-						{'conference': 'NFC', 'division': 'NFCNorth',  'text': "North", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':575},
-						{'conference': 'NFC', 'division': 'NFCEast',  'text': "East", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':167, 'y':618},
-						{'conference': 'NFC', 'division': 'NFCSouth',  'text': "South", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':661},
-						{'conference': 'NFC', 'division': 'NFCWest',  'text': "West", 'primaryColor': '#013369', 'secondaryColor': '##D3D3D3', 'x':58, 'y':618},
+								}
+							})
+	
+	
+						var divisions = [{'conference': 'AFC', 'division': 'AFCNorth', 'text': "North", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':125},
+						{'conference': 'AFC', 'division': 'AFCEast',  'text': "East", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':167, 'y':168},
+						{'conference': 'AFC', 'division': 'AFCSouth',  'text': "South", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':211},
+						{'conference': 'AFC', 'division': 'AFCWest',  'text': "West", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':58, 'y':168},
+						{'conference': 'NFC', 'division': 'NFCNorth',  'text': "North", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':325},
+						{'conference': 'NFC', 'division': 'NFCEast',  'text': "East", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':167, 'y':368},
+						{'conference': 'NFC', 'division': 'NFCSouth',  'text': "South", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':411},
+						{'conference': 'NFC', 'division': 'NFCWest',  'text': "West", 'primaryColor': '#013369', 'secondaryColor': '##D3D3D3', 'x':58, 'y':368},
 				]
-
-				// var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':90, 'y':325},
-				// {'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':90, 'y':550}]
-
+	
 				var svg = d3.select("svg");
 				var divisionLabels = svg.selectAll("divisionLabel")
-				  .data(divisions)
-				  .enter()
-				  .append("rect")
-
+					.data(divisions)
+					.enter()
+					.append("rect")
+	
 				divisionLabels.attr("x", d=>d['x'])
-				  .data(divisions)
-				  .attr("y", d=>d['y'])
-				  .attr("width", '100')
-				  .attr("height", "35")
-				  .attr('stroke', d=>d['secondaryColor'])
-				  .attr('stroke-width', 4)
-				  .style('fill', d=>d['primaryColor'])
+					.data(divisions)
+					.attr("y", d=>d['y'])
+					.attr("width", '100')
+					.attr("height", "35")
+					.attr('stroke', d=>d['secondaryColor'])
+					.attr('stroke-width', 4)
+					.style('fill', d=>d['primaryColor'])
 					.attr('conference', d=>d['conference'])
 					.attr('division', d=>d['division'])
 					.on("click", function(d){
@@ -524,48 +522,48 @@ function createYearTotalChart(){
 									.style("stroke-width", lineStroke);
 								}
 					})
-
+	
 					var divisionLabelsText = svg.selectAll("divisionLabelText")
-					  .data(divisions)
-					  .enter()
-					  .append("text")
-
+						.data(divisions)
+						.enter()
+						.append("text")
+	
 					divisionLabelsText.text(d=>d['text'])
-					  .attr('x', d=>d['x'] + 23)
-					  .attr('y', d=>d['y'] + 25)
-					  .attr('font-size', '22px')
-					  .attr('fill', 'black')
-					  .attr('division', d=>d['division'])
-					  .on("click", function(d){
-					    if (!d3.select(this).classed("selected") ){
+						.attr('x', d=>d['x'] + 23)
+						.attr('y', d=>d['y'] + 25)
+						.attr('font-size', '22px')
+						.attr('fill', 'black')
+						.attr('division', d=>d['division'])
+						.on("click", function(d){
+						if (!d3.select(this).classed("selected") ){
 								active = true;
-					      d3.select(this).classed("selected", true)
-					      d3.selectAll('.line')
-					        .style('opacity', otherLinesOpacityHover);
-					      d3.selectAll('.circle')
-					          .style('opacity', otherLinesOpacityHover);
+							d3.select(this).classed("selected", true)
+							d3.selectAll('.line')
+							.style('opacity', otherLinesOpacityHover);
+							d3.selectAll('.circle')
+								.style('opacity', otherLinesOpacityHover);
 								d3.selectAll('rect')
 										.style('opacity', otherLinesOpacityHover);
-					      d3.select(this)
-					        d3.selectAll("[division=" + d.division + "]")
+							d3.select(this)
+							d3.selectAll("[division=" + d.division + "]")
 										.attr("r", circleRadiusHover)
-					          .style('opacity', lineOpacityHover)
+								.style('opacity', lineOpacityHover)
 										.style("stroke-width", 5);
-					    }else{
+						}else{
 								active = false;
-					      d3.select(this).classed("selected", false);
-					      d3.selectAll('.line')
-					        .style('opacity', lineOpacityHover)
-					        .style("stroke-width", lineStroke);
-					      d3.selectAll('.circle')
+							d3.select(this).classed("selected", false);
+							d3.selectAll('.line')
+							.style('opacity', lineOpacityHover)
+							.style("stroke-width", lineStroke);
+							d3.selectAll('.circle')
 									.attr("r", circleRadius)
-					      	.style('opacity', lineOpacityHover);
-					      d3.selectAll('rect')
-					      	.style('opacity', lineOpacityHover);
+								.style('opacity', lineOpacityHover);
+							d3.selectAll('rect')
+								.style('opacity', lineOpacityHover);
 								d3.select(this)
 									d3.selectAll("[division=" + d.division + "]")
 										.style("stroke-width", lineStroke);
-					        }
-					  })
-	});
-}
+							}
+						})
+		});
+	}

@@ -1,7 +1,7 @@
-function createWeekPercentChart(input){
+function createMonthTotalChart(input){
 	d3.select("svg").remove();
 	var data;
-	$.getJSON("../countData/weekCounts-" + input.replace( /\s/g, '') + ".json", function(json){
+	$.getJSON("../countData/monthCounts-" + input.toString() + ".json", function(json){
 	    data = json;
 
 	var width = 1250;
@@ -22,25 +22,34 @@ function createWeekPercentChart(input){
 
 	var active = false;
 
-  Date.prototype.getWeek = function() {
-  var onejan = new Date(this.getFullYear(),0,1);
-  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
-}
+  var month = new Array();
+      month[0] = "January";
+      month[1] = "February";
+      month[2] = "March";
+      month[3] = "April";
+      month[4] = "May";
+      month[5] = "June";
+      month[6] = "July";
+      month[7] = "August";
+      month[8] = "September";
+      month[9] = "October";
+      month[10] = "November";
+      month[11] = "December";
 
 
 	/* Format Data */
-	var parseDate = d3.timeParse("%Y-%m-%W");
+	var parseDate = d3.timeParse("%Y-%m");
 	data.forEach(function(d, i) {
 		team = d.team;
 		conference = d.conference;
 		division = d.division;
 	  d.values.forEach(function(d) {
-	    d.id = i;
-	    d.date = parseDate(d.date);
-	    d.percent = d.percent;
-			d.team = team;
-			d.conference = conference;
-			d.division = division;
+		    d.id = i;
+		    d.date = parseDate(d.date);
+		    d.count = d.count;
+				d.team = team;
+				d.conference = conference;
+				d.division = division;
 	  });
 	});
 
@@ -49,7 +58,7 @@ function createWeekPercentChart(input){
 	var domain = []
 	data.forEach(function(i){
 		i.values.forEach(function(j){
-			domain.push(parseInt(j.percent));
+			domain.push(parseInt(j.count));
 		});
 	});
 
@@ -66,17 +75,14 @@ function createWeekPercentChart(input){
 	/* Add SVG */
 	var svg = d3.select("#chart").append("svg")
 	  .attr("width", (width+margin)+"px")
-	  .attr("height", (height+margin-200)+"px")
+	  .attr("height", (height-175)+"px")
 	  .append('g')
-	  .attr("transform", `translate(${margin}, ${margin})`);
-
-	/* Changes svg position */
-	$("svg").css({top: -250, position:'relative'});
-
+	  .attr("transform", `translate(${margin}, ${75})`);
+	
 	/* Add line into SVG */
 	var line = d3.line()
 	  .x(d => xScale(d.date))
-	  .y(d => yScale(d.percent))
+	  .y(d => yScale(d.count))
 
 	let lines = svg.append('g')
 	  .attr('class', 'lines');
@@ -87,12 +93,12 @@ function createWeekPercentChart(input){
 	  .on("mouseover", function(d, i) {
 	      svg.append("text")
 					.attr("class", "title-text")
-					.attr('font-size', '40px')
+					.attr('font-size', '35px')
 	        .style("fill", d.primaryColor)
 	        .text(d.team)
 	        .attr("text-anchor", "middle")
 	        .attr("x", (width+margin)/2)
-	        .attr("y", 350);
+	        .attr("y", 100);
 	    })
 	  .on("mouseout", function(d) {
 	      svg.select(".title-text")
@@ -151,19 +157,17 @@ function createWeekPercentChart(input){
 	        .style("cursor", "pointer")
 	        .append("text")
 	        .attr("class", "text")
-	        .text(parseFloat(Math.round(`${d.percent}` * 100) / 100).toFixed(2)+ '%')
+	        .text(d.count)
 	        .attr("x", d => xScale(d.date)-25)
-	        .attr("y", d => yScale(d.percent)-40);
+	        .attr("y", d => yScale(d.count)-40);
 
 				d3.select(this)
 					.style("cursor", "pointer")
 					.append("text")
 					.attr("class", "text")
-          //calculates week number of year
-
-					.text(d.date.getWeek() + ", " + d.date.getFullYear())
+					.text(month[d.date.getMonth()] + ", " + d.date.getFullYear())
 					.attr("x", d => xScale(d.date)-55)
-					.attr("y", d => yScale(d.percent)-15);
+					.attr("y", d => yScale(d.count)-15);
 
 				if (!active){
 					d3.selectAll('.line')
@@ -209,7 +213,7 @@ function createWeekPercentChart(input){
 		.attr("conference", d => d.conference)
 		.attr("division", d => d.division)
 	  .attr("cx", d => xScale(d.date))
-	  .attr("cy", d => yScale(d.percent))
+	  .attr("cy", d => yScale(d.count))
 	  .attr("r", circleRadius)
 	  .style('opacity', circleOpacity)
 	  .on("mouseover", function(d, i) {
@@ -245,7 +249,7 @@ function createWeekPercentChart(input){
 
 
 	/* Add Axis into SVG */
-	var xAxis = d3.axisBottom(xScale).ticks(6);
+	var xAxis = d3.axisBottom(xScale).ticks(12);
 	var yAxis = d3.axisLeft(yScale).ticks(10);
 
 
@@ -258,30 +262,28 @@ function createWeekPercentChart(input){
 	  .attr("class", "y axis")
 	  .call(yAxis)
 	  .append('text')
-	  .attr("y", -25)
-	  .attr("x", -125)
-	  .attr('font-size', '13px')
+	  .attr("y", 15)
 	  .attr("transform", "rotate(-90)")
 	  .attr("fill", "#000")
-	  .text("Percentage of Total Mentions");
+	  .text("Total Mentions");
 
 
-		x = width + 20
-		y = 225
+		x = width + 30
+		y = 2
 
 			for(var i = 0; i < data.length; i++) {
 				data[i]['x'] = x
 				data[i]['y'] = y
 
 				if (i == data.length/2){
-					x = width + 125
-					y = 225
+					x = width + 135
+					y = 2
 				}
 				if (i => data.length/2){
 					data[i]['x'] = x
 					data[i]['y'] = y
 				}
-				y = y + 38
+				y = y + 36
 			}
 
 		var svg = d3.select("svg");
@@ -378,8 +380,8 @@ function createWeekPercentChart(input){
 								}
 				})
 
-				var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':110, 'y':325},
-				{'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':110, 'y':525}]
+				var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':110, 'y':75},
+				{'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':110, 'y':275}]
 
 				var svg = d3.select("svg");
 				var conferenceLabels = svg.selectAll("conferenceLabel")
@@ -470,18 +472,15 @@ function createWeekPercentChart(input){
 						})
 
 
-					var divisions = [{'conference': 'AFC', 'division': 'AFCNorth', 'text': "North", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':375},
-					{'conference': 'AFC', 'division': 'AFCEast',  'text': "East", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':167, 'y':418},
-					{'conference': 'AFC', 'division': 'AFCSouth',  'text': "South", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':461},
-					{'conference': 'AFC', 'division': 'AFCWest',  'text': "West", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':58, 'y':418},
-					{'conference': 'NFC', 'division': 'NFCNorth',  'text': "North", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':575},
-					{'conference': 'NFC', 'division': 'NFCEast',  'text': "East", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':167, 'y':618},
-					{'conference': 'NFC', 'division': 'NFCSouth',  'text': "South", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':661},
-					{'conference': 'NFC', 'division': 'NFCWest',  'text': "West", 'primaryColor': '#013369', 'secondaryColor': '##D3D3D3', 'x':58, 'y':618},
+					var divisions = [{'conference': 'AFC', 'division': 'AFCNorth', 'text': "North", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':125},
+					{'conference': 'AFC', 'division': 'AFCEast',  'text': "East", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':167, 'y':168},
+					{'conference': 'AFC', 'division': 'AFCSouth',  'text': "South", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':115, 'y':211},
+					{'conference': 'AFC', 'division': 'AFCWest',  'text': "West", 'primaryColor': '#D2122E', 'secondaryColor': '#D3D3D3', 'x':58, 'y':168},
+					{'conference': 'NFC', 'division': 'NFCNorth',  'text': "North", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':325},
+					{'conference': 'NFC', 'division': 'NFCEast',  'text': "East", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':167, 'y':368},
+					{'conference': 'NFC', 'division': 'NFCSouth',  'text': "South", 'primaryColor': '#013369', 'secondaryColor': '#D3D3D3', 'x':115, 'y':411},
+					{'conference': 'NFC', 'division': 'NFCWest',  'text': "West", 'primaryColor': '#013369', 'secondaryColor': '##D3D3D3', 'x':58, 'y':368},
 			]
-
-			// var conferences = [{'conference': 'AFC', 'primaryColor': '#D2122E', 'secondaryColor': '#000000', 'x':90, 'y':325},
-			// {'conference': 'NFC', 'primaryColor': '#013369', 'secondaryColor': '#000000', 'x':90, 'y':550}]
 
 			var svg = d3.select("svg");
 			var divisionLabels = svg.selectAll("divisionLabel")
