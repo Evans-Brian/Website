@@ -79,14 +79,33 @@
 
 <body>
     <div class="content">
-        <h2 class="content-subhead">What and How</h2>
+        <h2 class="content-subhead">Summary</h2>
             <p>
-                    I scraped mentions of team names on r/NFL using Python and <a href="https://pushshift.io/">PushShift</a>.  The data is plotted
-                    by total mentions and percentage of total mentions over weeks, months, and years using <a href="https://d3js.org/">D3</a>.
+                    I wrote a Python script that the utilized the <a href="https://pushshift.io/">PushShift</a> API to read in all Reddit comments on r/NFL 
+                    that mentioned an NFL team name. I compiled the sum of unique mentions for each team by year, month, and week into a set of JSON files. I wrote
+                    <a href="https://github.com/Evans-Brian/Website/tree/master/projects/redditNFLTeamNameScraping/chartCreationJS">several Javascript scripts</a> 
+                    with <a href="https://d3js.org/">D3.js</a> that create that interactive line charts of this date.
+                    
                     Click on a button to create the corresponding chart.
             </p>
 
     </div>
+    
+    <div class="content">
+        <h2 class="content-subhead">Functionality</h2>
+        <p>
+            D3.js is a JavaScript library for manipulating documents based on data. It offers near infinite control over visualization and is superior to static
+            images for data visualization because users can directly interact with the data.  D3 is responsible for the following additionally functions: <br/>
+            <ul>
+                    <li>Mousing over a line or clicking a team button highlights the team line and button while lowering the opacity of other lines and buttons.</li>
+                    <li>Clicking a conference/division button highlights the lines and team buttons of teams in that conference/division, while lowering the opacity of others.</li>
+                    <li>Mousing over a specific point will display date and count data specific to that point.</li>
+                    <li>Primary and secondary colors for each line/button match their team's colors</li>
+             </ul>  
+            Note: Mousing over lines to quickly will cause the previous team's name to persist. 
+        </p>
+    </div>
+    
     <div class="chart">
             <div style = "position:relative; left:31%; margin:8px" class="dropdown">
                     <button onclick="createYearTotalChart()" class="dropbtn">&nbsp; Yearly Mentions &nbsp;</button>
@@ -171,20 +190,7 @@
             <div id="chart"></div>
         </div>
 
-        <div class="content">
-            <h2 class="content-subhead">Functionality</h2>
-            <p>
-                D3.js is a JavaScript library for manipulating documents based on data. It offers near infinite control over visualization and is superior to static
-                images for data visualization because users can directly interact with the data.  D3 is responsible for the following additionally functions: <br/>
-                <ul>
-                        <li>Mousing over a line or clicking a team button highlights the team line and button while lowering the opacity of other lines and buttons.</li>
-                        <li>Clicking a conference/division button highlights the lines and team buttons of teams in that conference/division, while lowering the opacity of others.</li>
-                        <li>Mousing over a specific point will display date and count data specific to that point.</li>
-                        <li>Primary and secondary colors for each line/button match their team's colors</li>
-                      </ul>  
-                      
-            </p>
-        </div>
+
     </body>
 
 <script src="/combo/1.18.13?/js/ui.js"></script>
