@@ -35,25 +35,20 @@
 
 <body>
     <div class="content">
-      <h2 class="content-subhead">What and How</h2>
-        <p>    Various NFL team stats plotted over the last 15 years with a focus on the Browns and Bengals/
-                I scraped mentions of team names on r/NFL using Python and <a href="https://pushshift.io/">PushShift</a>.  The data is plotted
-                by total mentions and percentage of total mentions over weeks, months, and years using <a href="https://d3js.org/">D3</a>.
-                Click on a button to create the corresponding chart.
-        </p>
-      <h2 class="content-subhead">Functionality</h2>
-        <p>
-            D3.js is a JavaScript library for manipulating documents based on data. It offers near infinite control over visualization and is superior to static
-            images for data visualization because users can directly interact with the data.  D3 is responsible for the following additionally functions: <br/>
-            <ul>
-                    <li>Mousing over a line or clicking a team button highlights the team line and button while lowering the opacity of other lines and buttons.</li>
-                    <li>Clicking a conference/division button highlights the lines and team buttons of teams in that conference/division, while lowering the opacity of others.</li>
-                    <li>Mousing over a specific point will display date and count data specific to that point.</li>
-                    <li>Primary and secondary colors for each line/button match their team's colors</li>
-                  </ul>  
-                  
-        </p>
+        <h2 class="content-subhead">Summary</h2>
+            <p>
+                    I created an interactive <a href="http://bl.ocks.org/eesur/1a2514440351ec22f176">Parallel Coordinates</a> plot to compare common stats across
+                    NFL teams.  Upon selection, a table is also created below the visualization.  
+            <p>
+                Note: The chart can get a bit messy - you can click and drag your mouse over specific datapoints to select lines found only in that window.
+            </p>
+            </p>
+            <p>     
+                <b>Select a stat to visualize</b>
+            </p>
+
     </div>
+    
     <div class="chart">
       <br>
       <i> Click on a stat to begin visualizing </i>
