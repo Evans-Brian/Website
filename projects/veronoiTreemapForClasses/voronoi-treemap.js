@@ -98,6 +98,7 @@ function drawFooter() {
     .classed("tiny light", true)
     .attr("transform", "translate("+[halfWidth*.2, height]+")")
     .attr("text-anchor", "middle")
+    .attr("text-color", "#ffffff")
     .text("Click Class for Link to Page")
   drawingArea.append("text")
     .classed("tiny light", true)
@@ -135,6 +136,7 @@ function drawLegends(rootData) {
   legend.append("text")
     .classed("tiny", true)
     .attr("transform", "translate("+[colorWidth*.8+5, -2]+")")
+    .attr("text-color", "#ffffff")
     .text(function(d){ return d.name; });
 
   legendContainer.append("text")
