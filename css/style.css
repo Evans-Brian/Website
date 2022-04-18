@@ -1428,6 +1428,9 @@
         stroke-width: 1px;
         stroke:darkgrey;
       }
+      .legend {
+        color: #ffffff;
+      }
 
   }
 }
