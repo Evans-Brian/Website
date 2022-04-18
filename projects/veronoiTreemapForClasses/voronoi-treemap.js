@@ -142,6 +142,7 @@ function drawLegends(rootData) {
   legendContainer.append("text")
     .attr("transform", "translate("+[0, -AreasOfStudy.length*(legendHeight+interLegend)-5]+")")
     .text("Areas of Study");
+    .style("fill", "#ffffff")
 }
 
 function drawTreemap(hierarchy) {
